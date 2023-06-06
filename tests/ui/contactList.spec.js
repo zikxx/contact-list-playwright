@@ -1,8 +1,8 @@
 // @ts-check
 const {test, expect} = require('@playwright/test'),
-    {LoginPage} = require("../ui/LoginPage"),
-    {ContactsPage} = require("../ui/ContactListPage"),
-    contactTestData = require('../data/contactTestData');
+    {LoginPage} = require("../../ui/LoginPage"),
+    {ContactsPage} = require("../../ui/ContactListPage"),
+    contactTestData = require('../../data/contactTestData');
 
 test.beforeEach(async ({page}, testInfo) => {
     console.log(`Running ${testInfo.title}`);
@@ -18,6 +18,7 @@ test('Create new contact', async ({page}) => {
     await contactsPage.addContact.click();
     await contactsPage.createNewContact(contactTestData.allValidData);
     await contactsPage.submit.click();
+
     await expect(page).toHaveTitle('My Contacts');
     await expect(page.locator('H1')).toHaveText('Contact List');
 });

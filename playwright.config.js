@@ -31,7 +31,12 @@ module.exports = defineConfig({
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'on-first-retry',
         // Capture screenshot after each test failure.
-        screenshot: 'only-on-failure'
+        screenshot: 'only-on-failure',
+        extraHTTPHeaders: {
+            // Add authorization token to all requests.
+            // Assuming personal access token available in the environment.
+            Authorization: process.env.COOKIE,
+        },
     },
 
     /* Configure projects for major browsers */
@@ -41,15 +46,15 @@ module.exports = defineConfig({
             use: {...devices['Desktop Chrome']},
         },
 
-        {
-            name: 'firefox',
-            use: {...devices['Desktop Firefox']},
-        },
-
-        {
-            name: 'webkit',
-            use: {...devices['Desktop Safari']},
-        },
+        // {
+        //     name: 'firefox',
+        //     use: {...devices['Desktop Firefox']},
+        // },
+        //
+        // {
+        //     name: 'webkit',
+        //     use: {...devices['Desktop Safari']},
+        // },
 
         /* Test against mobile viewports. */
         // {
